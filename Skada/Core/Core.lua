@@ -3172,7 +3172,13 @@ do
         check_autostop(self.current, t.event, t:SourceInGroup(true))
     end
 
-    if self.current.stopped or not combatlog_events[t.event] then return end
+    --! WotLK fix (24.10): UNIT_DIED still reaches the modules after a segment is stopped. The wipe
+    -- auto-stop fires at 50% deaths (check_autostop, above), and this gate used to drop everything
+    -- after it -- so the remaining half of a wipe's deaths never reached the Deaths module. That is
+    -- exactly the "some deaths are missing on a wipe" report. DPS/healing/taken still freeze at the
+    -- stop; only the death record keeps going, which is what the Deaths view is for.
+    if not combatlog_events[t.event] then return end
+    if self.current.stopped and t.event ~= "UNIT_DIED" then return end
 
     self._Time = GetTime()
     check_cached_names(t)

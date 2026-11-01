@@ -28,6 +28,15 @@ Skada:RegisterModule("Tweaks", function(L, P, _, _, _, O)
 							end
 						end
 					end
+
+					--! 01.11: marking the kill is only half of what DBM/BigWigs do -- both also stop the
+					-- segment (Functions.lua:1197 and 1225). Without this the segment stayed live through the
+					-- ~1 minute Fury of the Frostmourne roleplay and only closed when combat dropped, so the
+					-- clocks kept running past 10%. Stop it here, exactly like a reported boss kill.
+					if not self.current.stopped then
+						self:StopSegment(L["Smart Stop"])
+						self:SetModes()
+					end
 				end
 				-- ignore the spell
 				if P.fofrostmourne then return end

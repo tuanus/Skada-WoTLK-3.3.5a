@@ -15,7 +15,7 @@
 ## SavedVariablesPerCharacter: SkadaCharDB
 ## DefaultState: enabled
 ## Author: Kader (|cff808080bkader#5341|r), edited by Tuan
-## Version: 1.8.89
+## Version: 1.8.90
 ## X-Date: 2026-10-18 @ 03:00 |cff808080UTC|r
 ## X-Credits: Zarnivoop
 ## X-Curse-Project-ID: 623633
